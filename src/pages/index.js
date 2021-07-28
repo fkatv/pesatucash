@@ -92,7 +92,7 @@ const IndexPage = () => {
   useEffect(()=>{})
 
   const calcular = () => {
-    const valor = calculator(tara, peso, [0,2,3]);
+    const valor = calculator(tara, peso, [0]);
     setTotal(valor)
   }
 
