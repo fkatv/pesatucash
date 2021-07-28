@@ -6,9 +6,10 @@ const monedas = [
   {"nombre":"$500","peso":6.5, "valor":500, "imagen":""},
 ]
 /** *
-Retorna numero de monedas y su valor en un pesaje de monedas comprobatorio.
+Retorna el valor en un pesaje de monedas considerando sesgos de +-0.5gr.
 P: peso en gramos de las monedas
-M: array de tipos de monedas que pueden haber en un conjunto de monedas [prediccion si hay mas de 2.]
+M: array de tipos de monedas que pueden haber en un conjunto de monedas
+[prediccion si hay mas de 2.**]
 */
 const tolerancia = 0.5
 
@@ -33,7 +34,12 @@ const prueba_y_Error = (i,j,m1,m2,P) => {
 
 const extraeValor_Peso = (M) => {
   let coins = M.map((item, i) => monedas[item])
-  return [ coins.map((i) => i.valor), coins.map((i) => i.peso) ]
+  if (coins.length>1){
+    return []
+    return [ coins.map((item,k) => item.valor), coins.map((i,k) => i.peso) ]
+  } else {
+    return [coins[0].valor, coins[0].peso]
+  }
 }
 
 const calcularMonto = (tara, P, M) => {
@@ -47,10 +53,6 @@ const calcularMonto = (tara, P, M) => {
     if (e_x ==0 || -tolerancia <= e_x <= tolerancia) {
       return valorCondicionado(e_x,_x, m_valor[0])
     } else {
-        // for (const i of Array(Math.ceil(_x)+1).keys()) {
-        //   let test = Math.abs(i*m_peso[0] -P)
-        //   if (-tolerancia <= test < tolerancia) return i*m_valor
-        // }
         return parseInt(_x)*m_valor[0]
       }
     }

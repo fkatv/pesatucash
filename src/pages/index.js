@@ -91,8 +91,14 @@ const IndexPage = () => {
 
   useEffect(()=>{})
 
+  const obtenerArreglo = (arr) => {
+    const moneys = arr.map((item, i) => {if(item === true){ return i}})
+    console.log(moneys)
+    return moneys
+  }
+
   const calcular = () => {
-    const valor = calculator(tara, peso, [0]);
+    const valor = calculator(tara, peso, obtenerArreglo(esToggled));
     setTotal(valor)
   }
 
@@ -106,16 +112,20 @@ const IndexPage = () => {
     <main style={pageStyles}>
       <title>Test fff</title>
       <h1 style={headingStyles}>
-        Moneas
-        <br />
-        <span style={headingAccentStyles}>— Laurelito Project! </span>
+        Molidillo
       </h1>
+      <h3>Calculadora de pesaje de monedas Chilenas
+      <br />
+      <span style={headingAccentStyles}>— Laurelito Project! </span>
+      </h3>
 
       <h2>
         Escoja la(s) moneda(s)
         <br/>
         {monedas_label.map((item, i) => (
-          <button key={i} onClick={() => changeToggle(i)} style={{color:esToggled[i] ? 'green' : "black"}}>{item}</button>
+          <button key={i} onClick={() => changeToggle(i)}
+          style={{color:esToggled[i] ? 'green' : "black"}}
+          >{item}</button>
         ))}
       </h2>
 
