@@ -85,22 +85,18 @@ const IndexPage = () => {
   const [tara, setTara] = useState(0);
   const [peso, setPeso] = useState(0);
   const [total, setTotal] = useState(0);
-  const [esToggled, setToggle] = useState([false, false, false, false])
+  const [monedaFocus, setMonedaFocus] = useState(0)
   const monedas_label = ['$10','$50','$100','$500']
   const monedas_valor = [10,50,100,500]
 
   useEffect(()=>{})
 
   const calcular = () => {
-    const valor = calculator(tara, peso, [0]);
+    const valor = calculator(tara, peso, monedaFocus);
     setTotal(valor)
   }
 
-  const changeToggle = (i) => {
-    let temp = esToggled
-    temp[i] = !temp[i]
-    setToggle(temp)
-  }
+
 
   return (
     <main style={pageStyles}>
@@ -112,20 +108,24 @@ const IndexPage = () => {
       </h1>
 
       <h2>
-        Escoja la(s) moneda(s)
+        Escoja la moneda a pesar
         <br/>
         {monedas_label.map((item, i) => (
-          <button key={i} onClick={() => changeToggle(i)} style={{color:esToggled[i] ? 'green' : "black"}}>{item}</button>
+          <button key={i} onClick={() => setMonedaFocus(i)} style={{color:monedaFocus === i ? 'green' : "black"}}>{item}</button>
         ))}
       </h2>
 
       <label>
         Tara en gramos
+        <br/>
         <input type="number" placeholder="Tara" value = {tara} onChange = {(e) => setTara(e.target.value)}/>
       </label>
 
+      <br />
+
       <label>
         Peso Total en gramos
+        <br/>
         <input type="number" placeholder="Peso total" value = {peso} onChange = {(e) => setPeso(e.target.value)}/>
       </label>
       <h2>${total}</h2>
