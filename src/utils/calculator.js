@@ -28,6 +28,7 @@ const eAbsoluto = (v) => {
 /** *
   Verifica si el residuo entre las dos cantidades de monedas a
   testear es menor al doble de la tolerancia para poder TARAR mejor.
+  vs 1.0.5
 */
 const prueba_y_Error = (i,j,m1,m2,P) => {
   const test = Math.abs(i*m1+j*m2 - P)
@@ -69,6 +70,11 @@ const calcularMonto = (tara, P, M) => {
     return(['#Mala medición, recalibre', 0])
   }
 
+  /** *
+    Calcula la cantidad y el valor final de las monedas combinadas de un
+    valor único
+    vs 1.0.5
+  */
   const calcularSiHayDosTiposMoneda = (P,_x,e_x,m_valor,moneda1,moneda2) => {
     const mpeso1 = moneda1.peso
     const mpeso2 = moneda2.peso
@@ -98,6 +104,11 @@ const calcularMonto = (tara, P, M) => {
     }
   }
 
+  /** *
+    Por ajustes de ensayo y error, esta función  transforma la cantidad de
+    monedas ya calculada, ajustandolo a un valor cercano a lo esperado.
+    vs 1.0.5
+  */
   const valorCondicionado = (e_, __x, valor, coin_name) => {
     if(e_ < 0) __x += tolerancia
     const x = parseInt(__x)
