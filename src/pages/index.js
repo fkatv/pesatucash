@@ -86,7 +86,7 @@ const IndexPage = () => {
 
       <footer>
       <br/><br/>
-      <a href="https://github.com/fkatv/Laurelito"> Esta página es de Código abierto sin fines de lucro ni analíticas </a>
+      <a href="https://github.com/fkatv/Laurelito"> Ésta página es de Código abierto sin fines de lucro ni analíticas </a>
       </footer>
 
     </main>

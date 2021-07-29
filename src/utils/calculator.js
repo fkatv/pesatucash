@@ -25,26 +25,32 @@ const eAbsoluto = (v) => {
   return v - parseInt(v)
 }
 
+/** *
+  Verifica si el residuo entre las dos cantidades de monedas a
+  testear es menor al doble de la tolerancia para poder TARAR mejor.
+*/
 const prueba_y_Error = (i,j,m1,m2,P) => {
-  const test = Math.abs(i*m1+j*m2 -P)
+  const test = Math.abs(i*m1+j*m2 - P)
   console.log(i,j, test)
-  if (test === 0) return true
-  if (-tolerancia <= test <= tolerancia) return true
-
-  return false
+  if ( test < tolerancia*2) return true
+  else return false
 }
 
+/** *
+  Según la tara, el peso de las monedas, y la Moneda a calcular,
+  determina la cantidad y el valor de dichas monedas.
+*/
 const calcularMonto = (tara, P, M) => {
 
   const m_nombre = monedas[M].nombre
   const m_valor = monedas[M].valor
   const m_peso = monedas[M].peso
-  console.log(tara, P, M, m_nombre, m_valor,m_peso)
   P = Math.abs(P - tara)
   const _x = estimaMoneys(P, m_peso)
   const e_x = eAbsoluto(_x)
-  console.log(m_valor)
-  if ( m_valor < 100 ||  m_valor === 500){
+
+
+  if ( m_valor !== 100){
     if (e_x === 0 || -tolerancia <= e_x <= tolerancia) {
       return valorCondicionado(e_x,_x, m_valor, m_nombre)
     } else {
@@ -82,17 +88,20 @@ const calcularMonto = (tara, P, M) => {
           if (prueba_y_Error(i,j,mpeso1,mpeso2,P)){
             return [`${i} moneda(s) nuevas y ${j} moneda(s) antiguas.`,calculaValor(i,j,100,100)]
           }
+          if (prueba_y_Error(j,i,mpeso2,mpeso1,P)){
+            return [`${j} moneda(s) nuevas y ${i} moneda(s) antiguas.`,calculaValor(i,j,100,100)]
+          }
         }
       }
       alert("Sus monedas tienen scotchs o estan con peso extra / o su balanza está demasiado descalibrada")
-      return(['*Mala medición, recalibre', 0])
+      return(['*Mala medición, recalibre',0])
     }
   }
 
   const valorCondicionado = (e_, __x, valor, coin_name) => {
     if(e_ < 0) __x += tolerancia
     const x = parseInt(__x)
-    return [Math.ceil(__x) + " moneda(s)# de "+coin_name, x * valor]
+    return [Math.ceil(__x) + " moneda(s) de "+coin_name, x * valor]
   }
 
 
