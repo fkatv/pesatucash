@@ -20,13 +20,17 @@ const MainPage = () => {
   useEffect(()=>{})
 
   const calcular = () => {
-    const data = calculator(tara, peso, monedaFocus);
-    console.log(data)
-    if (data) {
-      const txt = data[0]
-      const valor = data[1]
-      setTotal(valor)
-      setRCount(txt)
+    if (peso <= 15000) {
+      const data = calculator(tara, peso, monedaFocus);
+      console.log(data)
+      if (data) {
+        const txt = data[0]
+        const valor = data[1]
+        setTotal(valor)
+        setRCount(txt)
+      }
+    } else {
+      alert("Máximo 15 kilos (15000 grs.)")
     }
   }
 
